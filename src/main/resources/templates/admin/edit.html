@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>New Article</h1>
+    <form style="display: flex; flex-direction: column; width: 50%;" th:action="@{/edit/{articleId}(articleId=${updatedArticle.getArticleId()})}" th:object="${updatedArticle}" method="post">
+        <input type="hidden" name="_method" value="put">
+        <input placeholder="Article Title" type="text" th:field="*{articleName}" />
+        <input placeholder="Publishing Date" type="date" th:value="${updatedArticle.getOriginalCreatedAt()}" id="createdAt" name="createdAt" />
+        <textarea 
+            rows="5"
+            name="description"
+            placeholder="Content" 
+            th:field="*{articleDescription}"
+            required="required">
+        </textarea>
+        <input type="submit" value="Update" /> 
+    </form>
+</body>
+</html>

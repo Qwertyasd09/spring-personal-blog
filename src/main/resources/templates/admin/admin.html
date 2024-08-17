@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Personal Blog</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <form action="#">
+        <div>
+            <h1>Personal Blog</h1>
+            <input type="submit" value="Add" th:formaction="@{/new}" />
+        </div>
+        <table>
+            <tr style="display: flex;" th:each="article: ${articles}">
+                <td th:text="${article.getArticleName()}"/>
+                <td><input type="submit" value="Edit" th:formaction="@{'/edit/'+${article.getArticleId()}}" /></td>
+                <td><input type="submit" value="Delete" th:formaction="@{'/delete/'+${article.getArticleId()}}" /></td> 
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

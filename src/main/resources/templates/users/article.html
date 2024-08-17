@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Personal Blog</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1 th:text="${currentArticle.getArticleName()}"></h1>
+    <h2 th:text="${currentArticle.getCreatedAt()}"></h2>
+    <p th:text="${currentArticle.getArticleDescription()}"></p>
+</body>
+</html>

@@ -1,5 +1,9 @@
 package com.dgchiri.blog_project.models;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,8 +17,11 @@ public class Article {
     @Column(nullable = false, length = 20)
     private String articleName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 500)
     private String articleDescription;
+
+    @Column(name = "created_at")
+    private String createdAt;
 
     public Article() { }
 
@@ -48,9 +55,22 @@ public class Article {
         this.articleDescription = articleDescription;
     }
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-    
+    public void setCreatedAt(String createdAt) {
+        LocalDate date = LocalDate.parse(createdAt);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy", Locale.ENGLISH);
+        String formattedDate = date.format(formatter);
+        this.createdAt = formattedDate;
+    }
 
-
+    public String getOriginalCreatedAt() {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy", Locale.ENGLISH);
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(createdAt, inputFormatter);
+        return date.format(outputFormatter);
+    }
 
 }
